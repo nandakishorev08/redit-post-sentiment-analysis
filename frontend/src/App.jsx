@@ -35,14 +35,15 @@ function App() {
   setEmotion(null);
 
   try {
-    const res = await axios.get("http://127.0.0.1:8000/post-emotion", {
+    const apiBase = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+    const res = await axios.get(`${apiBase}/post-emotion`, {
       params: {
         user_id: username,
       },
     });
 
     const sentiment = res.data.message.title.sentiment;
-    console.log(res.data.message.title.title)
+    //console.log(res.data.message.title.title)
     const captionText = res.data.message.title;
     const result = analyzeEmotion(sentiment);
 
